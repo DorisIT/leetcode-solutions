@@ -1,0 +1,29 @@
+package com.techmisal.easy;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+public class FlattenNestedListIteratorTest {
+
+    @Test
+    public void testIsAnagram() {
+        List testList1 = new ArrayList(); testList1.add(1); testList1.add(2); testList1.add(3);
+        List testList2 = new ArrayList(); testList2.add(4); testList2.add(5); testList2.add(6);
+        List testList3 = new ArrayList(); testList3.add(7); testList3.add(8); testList3.add(9);
+
+        testList2.add(testList3); // TestList2 == [4, 5, 6, [7, 8, 9]] OR [4, 5, 6, testList3]
+        testList1.add(testList2); // testList1 == [1, 2, 3, [4, 5, 6, [7, 8, 9]]] OR [1, 2, 3, testList2]
+
+        List flattenedTestList1 = FlattenNestedListIterator.FlattenList(testList1);
+
+        String testList1MockUp = "[1, 2, 3, [4, 5, 6, [7, 8, 9]]]";
+        String Expected = "[1, 2, 3, 4, 5, 6, 7, 8, 9]";
+
+
+        Assert.assertEquals(testList1MockUp, testList1.toString());
+        Assert.assertEquals(Expected, flattenedTestList1.toString());
+    }
+}
